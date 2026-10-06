@@ -1,25 +1,40 @@
 package com.studentapp;
 
 import com.studentapp.controller.StudentController;
+import com.studentapp.controller.StudentGuiController;
 import com.studentapp.model.StudentRepository;
 import com.studentapp.view.StudentConsoleView;
+import com.studentapp.view.StudentGuiView;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Application Entry Point.
- * Sets up Dependency Injection by instantiating Model, View, and Controller.
+ * Launches the modern Swing Graphical User Interface (GUI) by default,
+ * with automatic fallback to console if running in a headless environment
+ * or when launched with the '--console' flag.
  */
 public class Main {
     public static void main(String[] args) {
-        // Instantiate Model (Repository)
+        // Shared Model repository
         StudentRepository repository = new StudentRepository();
 
-        // Instantiate View
-        StudentConsoleView view = new StudentConsoleView();
+        // Optional console mode flag
+        boolean forceConsole = args.length > 0 && args[0].equalsIgnoreCase("--console");
 
-        // Instantiate Controller with injected dependencies
-        StudentController controller = new StudentController(repository, view);
-
-        // Start the application
-        controller.start();
+        if (!forceConsole && !GraphicsEnvironment.isHeadless()) {
+            // Launch Modern Swing GUI
+            SwingUtilities.invokeLater(() -> {
+                StudentGuiView guiView = new StudentGuiView();
+                StudentGuiController guiController = new StudentGuiController(repository, guiView);
+                guiController.display();
+            });
+        } else {
+            // Launch Console Interface
+            StudentConsoleView consoleView = new StudentConsoleView();
+            StudentController consoleController = new StudentController(repository, consoleView);
+            consoleController.start();
+        }
     }
 }
