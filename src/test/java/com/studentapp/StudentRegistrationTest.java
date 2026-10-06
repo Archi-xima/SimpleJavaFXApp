@@ -1,18 +1,23 @@
 package com.studentapp;
 
-import com.studentapp.controller.StudentController;
+import com.studentapp.controller.StudentRegistrationController;
 import com.studentapp.model.Student;
 import com.studentapp.model.StudentRepository;
 import com.studentapp.model.exception.DuplicateStudentException;
 import com.studentapp.model.exception.InvalidStudentDataException;
-import com.studentapp.view.StudentConsoleView;
 
 /**
  * Self-contained Verification Test Suite for Student Registration & Error Handling.
+ *
+ * Course:      ICT161
+ * Lecturer:    Mr. Nyirenda
+ * Student:     Achizima Marvelous Mpashi
+ * Student ID:  202511543
+ * Program:     Data Science
  */
 public class StudentRegistrationTest {
     public static void main(String[] args) {
-        System.out.println("Running Student Registration automated tests...\n");
+        System.out.println("Running ICT161 Student Registration automated tests...\n");
 
         testSuccessfulRegistration();
         testDuplicateStudentError();
@@ -23,23 +28,22 @@ public class StudentRegistrationTest {
     }
 
     private static void testSuccessfulRegistration() {
-        StudentRepository repo = new StudentRepository();
-        StudentController controller = new StudentController(repo, new StudentConsoleView());
+        StudentRegistrationController controller = new StudentRegistrationController();
 
-        Student student = controller.registerStudent("STU101", "Alice Smith", "alice@university.edu", "Computer Science");
+        Student student = controller.registerStudent("202511543", "Achizima Marvelous Mpashi", "achizima@unza.zm", "Data Science");
         assert student != null : "Student should not be null";
-        assert repo.existsById("STU101") : "Repository should contain STU101";
-        System.out.println("[PASS] testSuccessfulRegistration");
+        assert student.getId().equals("202511543") : "Student ID should match";
+        System.out.println("[PASS] testSuccessfulRegistration (Registered Achizima Marvelous Mpashi)");
     }
 
     private static void testDuplicateStudentError() {
-        StudentRepository repo = new StudentRepository();
-        StudentController controller = new StudentController(repo, new StudentConsoleView());
+        StudentRegistrationController controller = new StudentRegistrationController();
 
-        controller.registerStudent("STU101", "Alice Smith", "alice@university.edu", "Computer Science");
+        controller.registerStudent("202511543", "Achizima Marvelous Mpashi", "achizima@unza.zm", "Data Science");
 
         try {
-            controller.registerStudent("STU101", "Bob Jones", "bob@university.edu", "Mathematics");
+            // Attempt duplicate registration with the same Student ID
+            controller.registerStudent("202511543", "Duplicate Student", "duplicate@unza.zm", "Data Science");
             throw new AssertionError("Expected DuplicateStudentException was not thrown");
         } catch (DuplicateStudentException e) {
             System.out.println("[PASS] testDuplicateStudentError: " + e.getMessage());
@@ -47,11 +51,10 @@ public class StudentRegistrationTest {
     }
 
     private static void testInvalidEmailError() {
-        StudentRepository repo = new StudentRepository();
-        StudentController controller = new StudentController(repo, new StudentConsoleView());
+        StudentRegistrationController controller = new StudentRegistrationController();
 
         try {
-            controller.registerStudent("STU102", "Charlie Brown", "invalid-email-address", "Physics");
+            controller.registerStudent("STU102", "Jane Doe", "invalid-email-address", "Data Science");
             throw new AssertionError("Expected InvalidStudentDataException was not thrown for invalid email");
         } catch (InvalidStudentDataException e) {
             System.out.println("[PASS] testInvalidEmailError: " + e.getMessage());
@@ -59,11 +62,10 @@ public class StudentRegistrationTest {
     }
 
     private static void testBlankFieldsError() {
-        StudentRepository repo = new StudentRepository();
-        StudentController controller = new StudentController(repo, new StudentConsoleView());
+        StudentRegistrationController controller = new StudentRegistrationController();
 
         try {
-            controller.registerStudent("", "David Miller", "david@university.edu", "Biology");
+            controller.registerStudent("", "John Doe", "john@university.edu", "Data Science");
             throw new AssertionError("Expected InvalidStudentDataException was not thrown for empty ID");
         } catch (InvalidStudentDataException e) {
             System.out.println("[PASS] testBlankFieldsError: " + e.getMessage());

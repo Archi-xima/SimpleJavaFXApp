@@ -1,40 +1,21 @@
 package com.studentapp;
 
-import com.studentapp.controller.StudentController;
-import com.studentapp.controller.StudentGuiController;
-import com.studentapp.model.StudentRepository;
-import com.studentapp.view.StudentConsoleView;
-import com.studentapp.view.StudentGuiView;
-
-import javax.swing.*;
-import java.awt.*;
+import javafx.application.Application;
 
 /**
- * Application Entry Point.
- * Launches the modern Swing Graphical User Interface (GUI) by default,
- * with automatic fallback to console if running in a headless environment
- * or when launched with the '--console' flag.
+ * Main Launcher Class.
+ * Acts as an entry point that delegates to the JavaFX Application lifecycle.
+ * This pattern prevents the common "JavaFX runtime components are missing"
+ * error when launching inside IntelliJ IDEA or from standard JARs.
+ *
+ * Course:      ICT161
+ * Lecturer:    Mr. Nyirenda
+ * Student:     Achizima Marvelous Mpashi
+ * Student ID:  202511543
+ * Program:     Data Science
  */
 public class Main {
     public static void main(String[] args) {
-        // Shared Model repository
-        StudentRepository repository = new StudentRepository();
-
-        // Optional console mode flag
-        boolean forceConsole = args.length > 0 && args[0].equalsIgnoreCase("--console");
-
-        if (!forceConsole && !GraphicsEnvironment.isHeadless()) {
-            // Launch Modern Swing GUI
-            SwingUtilities.invokeLater(() -> {
-                StudentGuiView guiView = new StudentGuiView();
-                StudentGuiController guiController = new StudentGuiController(repository, guiView);
-                guiController.display();
-            });
-        } else {
-            // Launch Console Interface
-            StudentConsoleView consoleView = new StudentConsoleView();
-            StudentController consoleController = new StudentController(repository, consoleView);
-            consoleController.start();
-        }
+        Application.launch(StudentApp.class, args);
     }
 }

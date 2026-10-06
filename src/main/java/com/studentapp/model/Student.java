@@ -4,6 +4,12 @@ import java.util.Objects;
 
 /**
  * Model class representing a Student entity.
+ *
+ * Course:      ICT161
+ * Lecturer:    Mr. Nyirenda
+ * Student:     Achizima Marvelous Mpashi
+ * Student ID:  202511543
+ * Program:     Data Science
  */
 public class Student {
     private final String id;

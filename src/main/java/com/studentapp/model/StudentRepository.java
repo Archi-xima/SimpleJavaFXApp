@@ -5,7 +5,12 @@ import com.studentapp.model.exception.DuplicateStudentException;
 import java.util.*;
 
 /**
- * Repository interface and in-memory implementation for managing Student persistence.
+ * Repository for managing Student data persistence.
+ *
+ * Course:      ICT161
+ * Lecturer:    Mr. Nyirenda
+ * Student:     Achizima Marvelous Mpashi (202511543)
+ * Program:     Data Science
  */
 public class StudentRepository {
     // LinkedHashMap preserves insertion order for display
