@@ -30,7 +30,7 @@ public class StudentRegistrationTest {
     private static void testSuccessfulRegistration() {
         StudentRegistrationController controller = new StudentRegistrationController();
 
-        Student student = controller.registerStudent("202511543", "Achizima Marvelous Mpashi", "achizima@unza.zm", "Data Science");
+        Student student = controller.registerStudent("202511543", "Achizima Marvelous Mpashi", "mpashiachie@gmail.com", "Data Science");
         assert student != null : "Student should not be null";
         assert student.getId().equals("202511543") : "Student ID should match";
         System.out.println("[PASS] testSuccessfulRegistration (Registered Achizima Marvelous Mpashi)");
@@ -39,11 +39,11 @@ public class StudentRegistrationTest {
     private static void testDuplicateStudentError() {
         StudentRegistrationController controller = new StudentRegistrationController();
 
-        controller.registerStudent("202511543", "Achizima Marvelous Mpashi", "achizima@unza.zm", "Data Science");
+        controller.registerStudent("202511543", "Achizima Marvelous Mpashi", "mpashiachie@gmail.com", "Data Science");
 
         try {
             // Attempt duplicate registration with the same Student ID
-            controller.registerStudent("202511543", "Duplicate Student", "duplicate@unza.zm", "Data Science");
+            controller.registerStudent("202511543", "Duplicate Student", "duplicate@gmail.com", "Data Science");
             throw new AssertionError("Expected DuplicateStudentException was not thrown");
         } catch (DuplicateStudentException e) {
             System.out.println("[PASS] testDuplicateStudentError: " + e.getMessage());

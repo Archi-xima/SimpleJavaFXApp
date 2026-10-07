@@ -61,7 +61,7 @@
                                 <TextField fx:id="nameField" promptText="e.g., Alice Smith" styleClass="input-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                                 <Label styleClass="form-label" text="Email Address *" GridPane.rowIndex="2" />
-                                <TextField fx:id="emailField" promptText="e.g., student@university.edu" styleClass="input-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <TextField fx:id="emailField" promptText="e.g., mpashiachie@gmail.com" styleClass="input-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                                 <Label styleClass="form-label" text="Course / Major *" GridPane.rowIndex="3" />
                                 <TextField fx:id="courseField" promptText="e.g., Data Science" styleClass="input-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />

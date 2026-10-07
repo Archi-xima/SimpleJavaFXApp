@@ -77,7 +77,7 @@ public class StudentRegistrationController implements Initializable {
 
     private void loadInitialData() {
         try {
-            Student sampleStudent = new Student("202511543", "Achizima Marvelous Mpashi", "achizima@unza.zm", "Data Science");
+            Student sampleStudent = new Student("202511543", "Achizima Marvelous Mpashi", "mpashiachie@gmail.com", "Data Science");
             repository.save(sampleStudent);
             studentObservableList.add(sampleStudent);
             updateStudentCount();
